@@ -11,6 +11,7 @@ public class Bear : MonoBehaviour
     public Vector3 nextpost;
     public LayerMask obstacleLayer;
     public Transform seen;
+    public Vector3 lastposition;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +23,14 @@ public class Bear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (seen != null) {
+        if (seen != null)
+        {
             //Rotates towards object and speeds up
             Vector3 targetvector = (seen.position - transform.position).normalized;
             float angle = Mathf.Atan2(targetvector.y, targetvector.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, 0, angle + 90);
             Debug.Log("Roatating");
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 2 * rotatespeed * Time.deltaTime);           
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 2 * rotatespeed * Time.deltaTime);
             rb.velocity = (seen.position - transform.position).normalized * 2 * movespeed;
 
             //Checks line of sight again
@@ -36,10 +38,15 @@ public class Bear : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, obstacleLayer);
             if (hit.collider != null)
             {
+                lastposition = seen.position;
                 seen = null;
                 StartCoroutine(ChangeDirection());
             }
-            
+        }
+        else if (seen != null) { 
+            //NavMesh to seen
+            //Once arrived do 360
+            //NavMesh to next point
         }
     }
 
