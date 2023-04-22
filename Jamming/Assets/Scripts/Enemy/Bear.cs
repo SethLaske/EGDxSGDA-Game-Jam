@@ -9,7 +9,8 @@ public class Bear : MonoBehaviour
     public Rigidbody2D rb;
     public PathPost firstpost;
     public Vector3 nextpost;
-    public Vector3 distractor;
+    public LayerMask obstacleLayer;
+    public Transform seen;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +22,24 @@ public class Bear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("down * rotation = " + transform.rotation * (Vector3.down));
-        if (distractor != null)
-        {
-            //rb.velocity = (nextpost - transform.position).normalized * movespeed;
-        }
-        else {
-            //rb.velocity = (distractor - transform.position).normalized * movespeed;
+        if (seen != null) {
+            //Rotates towards object and speeds up
+            Vector3 targetvector = (seen.position - transform.position).normalized;
+            float angle = Mathf.Atan2(targetvector.y, targetvector.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle + 90);
+            Debug.Log("Roatating");
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 2 * rotatespeed * Time.deltaTime);           
+            rb.velocity = (seen.position - transform.position).normalized * 2 * movespeed;
+
+            //Checks line of sight again
+            Vector3 direction = seen.position - transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, obstacleLayer);
+            if (hit.collider != null)
+            {
+                seen = null;
+                StartCoroutine(ChangeDirection());
+            }
+            
         }
     }
 
@@ -36,14 +48,15 @@ public class Bear : MonoBehaviour
         
         if (collision.gameObject.tag == "path") {
             nextpost = collision.GetComponent<PathPost>().nextpost.transform.position;
-            StartCoroutine(ChangeDirection());
+            if (seen == null) {
+                StartCoroutine(ChangeDirection());
+            }
+            
         }
 
         else if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Player spotted");
-            PlayerInteract player = collision.GetComponent<PlayerInteract>();
-            StartCoroutine(ChangeDirection());
+            Debug.Log("Player Eaten");
         }
     }
 
@@ -64,6 +77,8 @@ public class Bear : MonoBehaviour
         rb.velocity = (nextpost - transform.position).normalized * movespeed;
     }
 
+
+
     private float normalize_angle_left_right(float angle)
     {
         while (angle < -Mathf.PI) angle += 2 * Mathf.PI;
@@ -71,8 +86,9 @@ public class Bear : MonoBehaviour
         return angle;
     }
 
-    public void ApproachSight(Vector3 Location)
+    public void ApproachSight(Transform Location)
     {
+        seen = Location;
         Debug.Log("The bear has seen something and will go straight to it");
     }
 
