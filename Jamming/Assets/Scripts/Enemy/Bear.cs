@@ -17,6 +17,7 @@ public class Bear : MonoBehaviour
     public Transform seen;
     public Vector3 lastposition;
     public NavMeshAgent agent;
+    public Honey seenhoney;
     //public Vector3 direction;
     public bool focused;
     public float degreestorotate = 0;
@@ -53,6 +54,10 @@ public class Bear : MonoBehaviour
         else if (state == "Chase") {
             Chase();
         }
+        else if (state == "GoToHoney")
+        {
+            GoToHoney();
+        }
         //Debug.Log("Remaining Distance: " + agent.remainingDistance);
         /*if (seen != null)
         {
@@ -72,8 +77,8 @@ public class Bear : MonoBehaviour
             //rotate(agent.velocity);
         }*/
 
-        
-        
+
+
     }
 
     public void Patrol() { 
@@ -125,7 +130,20 @@ public class Bear : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void GoToHoney()
+    {
+        if (agent.remainingDistance > .2f)
+        {
+            Debug.Log("Approaching last known location");
+            Debug.Log("Remaing distance: " + agent.remainingDistance);
+            return;
+        }
+
+        state = "EatingHoney";
+        StartCoroutine(EatHoney());
+    }
+
+        private void OnTriggerEnter2D(Collider2D collision)
     {
         
         if (collision.gameObject.tag == "path") {
@@ -199,6 +217,13 @@ public class Bear : MonoBehaviour
         return angle;
     }*/
 
+    IEnumerator EatHoney() {
+        yield return new WaitForSeconds(2f);
+        Destroy(seenhoney.gameObject);
+        state = "Patrol";
+        agent.SetDestination(nextpost);
+    }
+
     public void ApproachSight(Transform location)
     {
         focused = true;
@@ -210,11 +235,20 @@ public class Bear : MonoBehaviour
     }
 
     public void ApproachAudio(Vector3 location) {
-        agent.SetDestination(location);
-        state = "Approach";
-        Debug.Log("The bear is bothered and will approach the noise");
+        if (state == "Patrol") {
+            agent.SetDestination(location);
+            state = "Approach";
+            Debug.Log("The bear is bothered and will approach the noise");
+        }
     }
 
+    public void ApproachHoney(Honey honey) {
+        if (state == "Patrol" || state == "Approach") {
+            seenhoney = honey;
+            agent.SetDestination(honey.transform.position);
+            state = "GoToHoney";
+        }
+    }
     public void rotate(Vector3 targetdirection) {
         targetdirection = targetdirection.normalized;
         float angle = Mathf.Atan2(targetdirection.y, targetdirection.x) * Mathf.Rad2Deg;

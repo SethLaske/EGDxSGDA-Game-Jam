@@ -29,5 +29,10 @@ public class Sight : MonoBehaviour
             }
                 
         }
+
+        Honey honey = collision.GetComponent<Honey>();
+        if (honey != null) {
+            bear.ApproachHoney(honey);
+        }
     }
 }

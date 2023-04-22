@@ -7,15 +7,16 @@ public class Hearing : MonoBehaviour
     public Bear bear;
     public float chancemultiplier;
     private void OnTriggerStay2D(Collider2D collision)
-    { 
-        if (collision.gameObject.tag == "Player")
+    {
+        SoundObject sound = collision.GetComponent<SoundObject>();
+        if (sound != null)
         {
-            Debug.Log("Player heard");
-            PlayerInteract player = collision.GetComponent<PlayerInteract>();
-            float chance = chancemultiplier * player.sound / Vector3.Distance(player.transform.position, bear.transform.position);
+            Debug.Log("Something heard");
+            
+            float chance = chancemultiplier * sound.sound / Vector3.Distance(sound.transform.position, bear.transform.position);
 
             if (Random.Range(0, chance) < 1) {
-                bear.ApproachAudio(player.transform.position);
+                bear.ApproachAudio(sound.transform.position);
             }
         }
     }
