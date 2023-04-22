@@ -101,7 +101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50d702c24bc6ab46973329ac5bc4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: 0
+  rb: {fileID: 0}
+  moveSpeed: 5
+  forceToApplyOnPlayer: {x: 0, y: 0}
+  forceOnSide: 5
+  sound: 5
   honey: {fileID: 5215523155853453151, guid: 7e8f1333a623b3c408190bbd93ceefcc, type: 3}
 --- !u!50 &745310358109546555
 Rigidbody2D:
