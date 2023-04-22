@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
 {
-
+    public float sound;
     //inventory is a dictionary,key = itemname, int = amount of the item
     private Dictionary<string, int> inv = new Dictionary<string, int>();
     //private Collider2D lastInteract;

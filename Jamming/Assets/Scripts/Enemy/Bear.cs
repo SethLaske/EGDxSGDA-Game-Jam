@@ -33,8 +33,16 @@ public class Bear : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "path") {
             nextpost = collision.GetComponent<PathPost>().nextpost.transform.position;
+            StartCoroutine(ChangeDirection());
+        }
+
+        else if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Player spotted");
+            PlayerInteract player = collision.GetComponent<PlayerInteract>();
             StartCoroutine(ChangeDirection());
         }
     }
