@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Bear : MonoBehaviour
 {
+    public string state;
+
     public float walkspeed;
     public float runspeed;
     public float rotatespeed;
@@ -22,6 +24,7 @@ public class Bear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        state = "Patrol";
         nextpost = firstpost.transform.position;
         agent.SetDestination(nextpost);
         //StartCoroutine(ChangeDirection());
@@ -37,10 +40,21 @@ public class Bear : MonoBehaviour
         if (degreestorotate == 0) {
             rotate(agent.velocity);
         }
-        
 
+
+        if (state == "Patrol")
+        {
+            Patrol();
+        }
+        else if (state == "Approach")
+        {
+            Approach();
+        }
+        else if (state == "Chase") {
+            Chase();
+        }
         //Debug.Log("Remaining Distance: " + agent.remainingDistance);
-        if (seen != null)
+        /*if (seen != null)
         {
             agent.SetDestination(seen.position);
             Vector3 direction = seen.position - transform.position;
@@ -56,10 +70,59 @@ public class Bear : MonoBehaviour
         }
         else {
             //rotate(agent.velocity);
-        }
+        }*/
 
         
         
+    }
+
+    public void Patrol() { 
+        //Nothing happens, kinda just follows path
+    
+    }
+
+    public void Approach() {
+        if (agent.remainingDistance > .2f)
+        {
+            Debug.Log("Approaching last known location");
+            Debug.Log("Remaing distance: " + agent.remainingDistance);
+            return;
+        }
+        //agent.ResetPath();
+
+        //Do a full 360
+        if (degreestorotate < 360)
+        {
+            Debug.Log("doing a 360");
+            degreestorotate += rotatespeed * Time.deltaTime;
+            transform.Rotate(Vector3.forward, rotatespeed * 1 * Time.deltaTime);
+            return;
+        }
+        
+        degreestorotate = 0;
+
+        //go to the next thing
+        
+        focused = false;
+        agent.speed = walkspeed;
+        agent.SetDestination(nextpost);
+        state = "Patrol";
+    }
+
+    public void Chase() {
+        agent.SetDestination(seen.position);
+        Vector3 direction = seen.position - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, obstacleLayer);
+        if (hit.collider != null)
+        {
+            //lastposition = seen.position;
+
+            //agent.SetDestination(lastposition);
+            
+            seen = null;
+            state = "Approach";
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -97,7 +160,7 @@ public class Bear : MonoBehaviour
 
         //yield return new WaitForSeconds(1f);
         //rb.velocity = (nextpost - transform.position).normalized * movespeed;
-    }*/
+    }
 
     IEnumerator LostSight() {
         //Approach the last remaining location
@@ -118,7 +181,9 @@ public class Bear : MonoBehaviour
             transform.Rotate(Vector3.forward, rotatespeed * 1 * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        Debug.Log("Degrees to Rotate: " + degreestorotate);
         degreestorotate = 0;
+        Debug.Log("Degrees to Rotate: " + degreestorotate);
         //go to the next thing
         Debug.Log("moving on with my life");
         focused = false;
@@ -132,17 +197,21 @@ public class Bear : MonoBehaviour
         while (angle < -Mathf.PI) angle += 2 * Mathf.PI;
         while (angle > Mathf.PI) angle -= 2 * Mathf.PI;
         return angle;
-    }
+    }*/
 
-    public void ApproachSight(Transform Location)
+    public void ApproachSight(Transform location)
     {
         focused = true;
-        seen = Location;
+        seen = location;
         agent.speed = runspeed;
+        state = "Chase";
+        degreestorotate = 0;
         Debug.Log("The bear has seen something and will go straight to it");
     }
 
-    public void ApproachAudio(Vector3 Location) {
+    public void ApproachAudio(Vector3 location) {
+        agent.SetDestination(location);
+        state = "Approach";
         Debug.Log("The bear is bothered and will approach the noise");
     }
 
