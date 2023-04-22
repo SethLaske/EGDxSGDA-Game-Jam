@@ -29,7 +29,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private GameObject honey;
 
     //stealth
-    private bool hidden;
+    public bool hidden;
     private bool stealthTerrain;
 
 

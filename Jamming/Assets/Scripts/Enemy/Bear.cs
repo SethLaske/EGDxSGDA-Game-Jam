@@ -38,7 +38,7 @@ public class Bear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (degreestorotate == 0) {
+        if (degreestorotate == 0 && agent.velocity.magnitude > 1) {
             rotate(agent.velocity);
         }
 
@@ -158,6 +158,7 @@ public class Bear : MonoBehaviour
         else if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Player Eaten");
+            Stun(3);
             //gameover
         }
     }
@@ -218,20 +219,25 @@ public class Bear : MonoBehaviour
     }*/
 
     IEnumerator EatHoney() {
+        focused = true;
         yield return new WaitForSeconds(2f);
         Destroy(seenhoney.gameObject);
         state = "Patrol";
         agent.SetDestination(nextpost);
+        focused = false;
     }
 
     public void ApproachSight(Transform location)
     {
-        focused = true;
-        seen = location;
-        agent.speed = runspeed;
-        state = "Chase";
-        degreestorotate = 0;
-        Debug.Log("The bear has seen something and will go straight to it");
+        if (focused == false) {
+            focused = true;
+            seen = location;
+            agent.speed = runspeed;
+            state = "Chase";
+            degreestorotate = 0;
+            Debug.Log("The bear has seen something and will go straight to it");
+        }
+        
     }
 
     public void ApproachAudio(Vector3 location) {
@@ -249,6 +255,22 @@ public class Bear : MonoBehaviour
             state = "GoToHoney";
         }
     }
+
+    public void Stun(float time) {
+        StartCoroutine(StunRoutine(time));
+    }
+
+    IEnumerator StunRoutine(float time)
+    {
+        agent.isStopped = true;
+        yield return new WaitForSeconds(time);
+        
+        agent.isStopped = false;
+        agent.SetDestination(transform.position);
+        state = "Approach";
+        focused = false;
+    }
+
     public void rotate(Vector3 targetdirection) {
         targetdirection = targetdirection.normalized;
         float angle = Mathf.Atan2(targetdirection.y, targetdirection.x) * Mathf.Rad2Deg;

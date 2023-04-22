@@ -39,10 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Bullet"))
-        {
-            forceToApplyOnPlayer = forceToApplyOnPlayer + new Vector2(-20, 0);
-            Destroy(collision.gameObject);
-        }
+       
     }
 }

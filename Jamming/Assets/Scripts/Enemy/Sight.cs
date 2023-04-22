@@ -25,7 +25,10 @@ public class Sight : MonoBehaviour
                 Debug.Log("Obstacle detected: " + hit.collider.name);
             }
             else {
-                bear.ApproachSight(player.transform);
+                if (player.hidden == false) {
+                    bear.ApproachSight(player.transform);
+                }
+                
             }
                 
         }
