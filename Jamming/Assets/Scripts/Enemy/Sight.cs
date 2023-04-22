@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Sight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Bear bear;
+    public LayerMask obstacleLayer;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Player seen");
+            PlayerInteract player = collision.GetComponent<PlayerInteract>();
+
+            Vector3 direction = player.transform.position - transform.position;
+
+            // Cast a ray in that direction
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, obstacleLayer);
+
+            // Check if the ray hit an obstacle
+            if (hit.collider != null)
+            {
+                Debug.Log("Obstacle detected: " + hit.collider.name);
+            }
+            else {
+                bear.ApproachSight(player.transform.position);
+            }
+                
+        }
     }
 }

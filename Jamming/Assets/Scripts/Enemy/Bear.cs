@@ -71,4 +71,12 @@ public class Bear : MonoBehaviour
         return angle;
     }
 
+    public void ApproachSight(Vector3 Location)
+    {
+        Debug.Log("The bear has seen something and will go straight to it");
+    }
+
+    public void ApproachAudio(Vector3 Location) {
+        Debug.Log("The bear is bothered and will approach the noise");
+    }
 }

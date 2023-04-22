@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Hearing : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Bear bear;
+    public float chancemultiplier;
+    private void OnTriggerStay2D(Collider2D collision)
+    { 
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Player heard");
+            PlayerInteract player = collision.GetComponent<PlayerInteract>();
+            float chance = chancemultiplier * player.sound / Vector3.Distance(player.transform.position, bear.transform.position);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            if (Random.Range(0, chance) < 1) {
+                bear.ApproachAudio(player.transform.position);
+            }
+        }
     }
 }

@@ -345,6 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6512132093108995235}
+  - component: {fileID: 134001580790410976}
   - component: {fileID: 6512132093108995244}
   - component: {fileID: 1594219135751272800}
   m_Layer: 0
@@ -369,6 +370,22 @@ Transform:
   m_Father: {fileID: 6512132093857034051}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &134001580790410976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512132093108995234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f7e3daf7593024988fc026f86fc067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bear: {fileID: 6512132093857034050}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!60 &6512132093108995244
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -598,6 +615,7 @@ GameObject:
   - component: {fileID: 6512132093606712917}
   - component: {fileID: 6512132093606712918}
   - component: {fileID: 3147042255190626296}
+  - component: {fileID: 332270944700588838}
   m_Layer: 0
   m_Name: Hearing
   m_TagString: NoStop
@@ -657,6 +675,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &332270944700588838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512132093606712916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a08d510acefb445b525629c525f4ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bear: {fileID: 6512132093857034050}
+  chancemultiplier: 150
 --- !u!1 &6512132093651024648
 GameObject:
   m_ObjectHideFlags: 0
