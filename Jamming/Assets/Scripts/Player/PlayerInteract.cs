@@ -29,7 +29,9 @@ public class PlayerInteract : MonoBehaviour
         raycastIgnoreLayers[0] = "Ignore Raycast";
         raycastMask = LayerMask.GetMask(raycastIgnoreLayers);
         raycastMask = ~raycastMask;
+        inv["honey"] = 999;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -38,14 +40,18 @@ public class PlayerInteract : MonoBehaviour
         {
             if (CheckShoot())
             {
-                Debug.Log("Can shoot to that location");
+                Debug.Log("ammo: " + inv["honey"]);
                 Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Debug.Log(mousepos);
-                Instantiate<GameObject>(honey, new Vector3(mousepos.x, mousepos.y, 0), Quaternion.identity);
+                //Debug.Log(mousepos);
+                GameObject honeyshot = Instantiate<GameObject>(honey, transform.position, Quaternion.identity);
+                //Instantiate<GameObject>(honey, new Vector3(mousepos.x, mousepos.y, 0), Quaternion.identity);
+                honeyshot.transform.up = new Vector3(mousepos.x, mousepos.y, honeyshot.transform.position.z) - honeyshot.transform.position;
+                honeyshot.GetComponent<HoneyShot>().SetVars(mousepos);
+                inv["honey"] -= 1;
             }
             else
             {
-                Debug.Log("Can't shoot to that location");
+                Debug.Log("Can't shoot");
             }
         }
 
@@ -136,6 +142,11 @@ public class PlayerInteract : MonoBehaviour
     //start honey shooting system
     private bool CheckShoot()
     {
+
+        //will eventually have ammo.
+
+        //mouse beyond wall detection - not needed.
+        /*
         Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log(transform.position);
         Debug.DrawRay(transform.position, mousepos - transform.position);
@@ -154,5 +165,11 @@ public class PlayerInteract : MonoBehaviour
         {
             return true;
         }  
+        */
+        if(inv["honey"] > 0){
+            return true;
+        }
+        return false;
+        
     }
 }
