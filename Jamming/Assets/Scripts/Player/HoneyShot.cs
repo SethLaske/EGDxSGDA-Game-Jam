@@ -33,7 +33,7 @@ public class HoneyShot : MonoBehaviour
     private void MakeHoney()
     {
         honey = Instantiate<GameObject>(honey, transform.position, Quaternion.identity);
-        Destroy(this);
+        Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
