@@ -50,6 +50,24 @@ public class PlayerInteract : MonoBehaviour
         Debug.Log(item + " amount: " + inv[item]);
     }
 
+    //returns the actual amount of the item removed (if it returns 0, that means there was no item
+    public int RemoveItem(string item, int amount = 1)
+    {
+        try
+        {
+            inv[item] -= amount; 
+            if (inv[item] <= 0){ //calculate the difference between amount to remove and amount actually removed
+                int diff = inv[item] * -1;
+                inv[item] = 0;
+                return amount - diff;   
+            }
+            return amount;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Interactable")
