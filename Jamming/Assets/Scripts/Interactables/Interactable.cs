@@ -6,9 +6,11 @@ public class Interactable : MonoBehaviour
 {
     public enum InteractType //defaults to pickup
     {
-        Pickup
+        Pickup,
+        ActiveHide,
+        PassiveHide
     }
-    [SerializeField] string itemName;
+    [SerializeField] protected string itemName;
     public virtual InteractType Interact(PlayerInteract playerInteract)
     {
         playerInteract.AddItem(itemName);

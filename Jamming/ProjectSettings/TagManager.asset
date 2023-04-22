@@ -7,6 +7,7 @@ TagManager:
   - Interactable
   - NoStop
   - path
+  - StealthTerrain
   layers:
   - Default
   - TransparentFX

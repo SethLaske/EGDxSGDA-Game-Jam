@@ -8,20 +8,37 @@ using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
 {
+
+    //movement
+    public Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    public Vector2 forceToApplyOnPlayer;
+    Vector2 playerInput;
+    public float forceOnSide = 5f;
+
+
     public float sound;
     //inventory is a dictionary,key = itemname, int = amount of the item
     private Dictionary<string, int> inv = new Dictionary<string, int>();
     //private Collider2D lastInteract;
     private List<Collider2D> lastInteract;
 
+    //honey
     string[] raycastIgnoreLayers;
     LayerMask raycastMask;
-
     [SerializeField] private GameObject honey;
 
+    //stealth
+    private bool hidden;
+    private bool stealthTerrain;
+
+
+
     // Start is called before the first frame update
+
     void Start()
     {
+        //interact
         lastInteract = new List<Collider2D>();
 
         //governs raycast
@@ -30,12 +47,21 @@ public class PlayerInteract : MonoBehaviour
         raycastMask = LayerMask.GetMask(raycastIgnoreLayers);
         raycastMask = ~raycastMask;
         inv["honey"] = 999;
+
+        //stealth
+        hidden = false;
+        stealthTerrain = false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
+        //player input
+        playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
+        //interact
         if (Input.GetMouseButtonDown(0))
         {
             if (CheckShoot())
@@ -66,7 +92,32 @@ public class PlayerInteract : MonoBehaviour
                 {
                     lastInteract.Remove(obj); //technically this *should* be triggered with the ontriggerexit, but this is for safety.
                 }
+                else if (type == Interactable.InteractType.ActiveHide)
+                {
+                    hidden = !hidden;
+                }
             }
+        }
+    }
+
+    //movement
+    void FixedUpdate()
+    {
+        if (!hidden)
+        {
+            // Movement
+            Vector2 moveForce = playerInput * moveSpeed;
+            moveForce = moveForce + forceToApplyOnPlayer;
+            forceToApplyOnPlayer /= forceOnSide;
+            if (Mathf.Abs(forceToApplyOnPlayer.x) <= 0.01f && Mathf.Abs(forceToApplyOnPlayer.y) <= 0.01f)
+            {
+                forceToApplyOnPlayer = Vector2.zero;
+            }
+            rb.velocity = moveForce;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -112,6 +163,11 @@ public class PlayerInteract : MonoBehaviour
         {
             lastInteract.Add(collision); //know we can interact
         }
+        else if(collision.tag == "StealthTerrain")
+        {
+            Debug.Log("Entered Grass");
+            stealthTerrain = true;
+        }
 
     }
 
@@ -132,6 +188,12 @@ public class PlayerInteract : MonoBehaviour
         {
             lastInteract.Remove(collision);
         }
+        else if (collision.tag == "StealthTerrain")
+        {
+            Debug.Log("Exited Grass");
+            stealthTerrain = false;
+        }
+
     }
 
     //
