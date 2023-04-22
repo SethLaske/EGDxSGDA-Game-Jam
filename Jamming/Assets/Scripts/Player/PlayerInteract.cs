@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -11,16 +14,41 @@ public class PlayerInteract : MonoBehaviour
     //private Collider2D lastInteract;
     private List<Collider2D> lastInteract;
 
+    string[] raycastIgnoreLayers;
+    LayerMask raycastMask;
+
+    [SerializeField] private GameObject honey;
+
     // Start is called before the first frame update
     void Start()
     {
         lastInteract = new List<Collider2D>();
 
+        //governs raycast
+        raycastIgnoreLayers = new string[2]; //have to resize :((
+        raycastIgnoreLayers[0] = "Ignore Raycast";
+        raycastMask = LayerMask.GetMask(raycastIgnoreLayers);
+        raycastMask = ~raycastMask;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (CheckShoot())
+            {
+                Debug.Log("Can shoot to that location");
+                Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Debug.Log(mousepos);
+                Instantiate<GameObject>(honey, new Vector3(mousepos.x, mousepos.y, 0), Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("Can't shoot to that location");
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E)) //interact
         {
             int listSize = lastInteract.Count;
@@ -35,6 +63,10 @@ public class PlayerInteract : MonoBehaviour
             }
         }
     }
+
+
+    //start interaction system
+    //
 
     //add X amount of an item
     public void AddItem(string item, int amount = 1)
@@ -94,5 +126,33 @@ public class PlayerInteract : MonoBehaviour
         {
             lastInteract.Remove(collision);
         }
+    }
+
+    //
+    //end interaction system
+
+
+
+    //start honey shooting system
+    private bool CheckShoot()
+    {
+        Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(transform.position);
+        Debug.DrawRay(transform.position, mousepos - transform.position);
+
+        float dist = Vector2.Distance(transform.position, mousepos);
+
+
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, mousepos - transform.position, dist, raycastMask); //invert mask
+        try
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            return false;
+        }
+        catch //hit nothing
+        {
+            return true;
+        }  
     }
 }
