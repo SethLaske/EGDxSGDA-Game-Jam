@@ -37,6 +37,9 @@ public class Bear : MonoBehaviour
     public AudioSource eathoney;
     public AudioSource stung;
 
+
+    private MusicController worldMusic;
+    private bool hasAddedToCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +50,9 @@ public class Bear : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        
+
+        worldMusic = GameObject.Find("Music Controller").GetComponent<MusicController>();
+        hasAddedToCount = false;
     }
 
     // Update is called once per frame
@@ -57,11 +62,16 @@ public class Bear : MonoBehaviour
             rotate(agent.velocity);
         }
 
-        
+
 
         if (state == "Chase")
         {
             Chase();
+            if (!hasAddedToCount)
+            {
+                hasAddedToCount = true;
+                worldMusic.AddBear();
+            }
         }
         else if (honeybrain.Count > 0 && hunting == false)
         {
@@ -69,7 +79,8 @@ public class Bear : MonoBehaviour
             {
                 honeybrain.RemoveAt(0);
             }
-            else {
+            else
+            {
                 state = "GoToHoney";
                 Debug.Log("Moving towards honey");
                 GoToHoney();
@@ -79,10 +90,18 @@ public class Bear : MonoBehaviour
         {
             Approach();
         }
-        else if (state == "Patrol") {
+        else if (state == "Patrol")
+        {
             Patrol();
         }
-        
+        if (state != "Chase")
+        {
+            if (hasAddedToCount)
+            {
+                hasAddedToCount = false;
+                worldMusic.RemoveBear();
+            }
+        }
 
     }
 
