@@ -36,6 +36,10 @@ public class PlayerInteract : MonoBehaviour
     private SpriteRenderer sprite;
 
 
+    //animation
+    public bool moving;
+    public bool shooting;
+
     // Start is called before the first frame update
 
     void Start()
@@ -70,6 +74,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (CheckShoot())
             {
+                shooting = true;
                 Debug.Log("ammo: " + inv["honey"]);
                 Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //Debug.Log(mousepos);
@@ -83,6 +88,10 @@ public class PlayerInteract : MonoBehaviour
             {
                 Debug.Log("Can't shoot");
             }
+        }
+        else
+        {
+            shooting = false;
         }
 
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E)) //interact
@@ -135,7 +144,12 @@ public class PlayerInteract : MonoBehaviour
             forceToApplyOnPlayer /= forceOnSide;
             if (Mathf.Abs(forceToApplyOnPlayer.x) <= 0.01f && Mathf.Abs(forceToApplyOnPlayer.y) <= 0.01f)
             {
+                moving = false;
                 forceToApplyOnPlayer = Vector2.zero;
+            }
+            else
+            {
+                moving = true;
             }
             rb.velocity = moveForce;
         }
