@@ -46,7 +46,7 @@ public class PlayerInteract : MonoBehaviour
         raycastIgnoreLayers[0] = "Ignore Raycast";
         raycastMask = LayerMask.GetMask(raycastIgnoreLayers);
         raycastMask = ~raycastMask;
-        inv["honey"] = 999;
+        inv["honey"] = 5;
 
         //stealth
         hidden = false;
