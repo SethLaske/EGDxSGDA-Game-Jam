@@ -50,6 +50,14 @@ public class PlayerMap : MonoBehaviour
         if (!stopMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, target, 5f * Time.deltaTime);
+            if(currentDir > 0)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                transform.rotation = new Quaternion(0, -180, 0, 0);
+            }
             if (Vector2.Distance(transform.position, target) < 0.05f) //magic number, can adjust as needed
             {
                 if (waypoints[currentWaypoint].GetComponent<MapNode>().type == MapNode.pointType.stop && target != startLoc)
