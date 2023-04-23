@@ -5,4 +5,5 @@ using UnityEngine;
 public class PathPost : MonoBehaviour
 {
     public PathPost nextpost;
+    public int pathnumber; 
 }
