@@ -120,6 +120,15 @@ public class PlayerInteract : MonoBehaviour
     {
         if (!hidden)
         {
+            float input = Input.GetAxis("Horizontal");
+            if (input > 0)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else if (input < 0)
+            {
+                transform.rotation = new Quaternion(0, -180, 0, 0);
+            }
             // Movement
             Vector2 moveForce = playerInput * moveSpeed;
             moveForce = moveForce + forceToApplyOnPlayer;
