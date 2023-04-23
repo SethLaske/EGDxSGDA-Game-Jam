@@ -349,4 +349,6 @@ public class Bear : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle + 90);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotatespeed * Time.deltaTime);
     }
+
+
 }

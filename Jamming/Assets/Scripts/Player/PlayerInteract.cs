@@ -48,6 +48,12 @@ public class PlayerInteract : MonoBehaviour
     public TextMeshProUGUI honeytext;
     public TextMeshProUGUI beetext;
 
+    //rotation lock
+    bool lockRot;
+
+    //firepoint
+    [SerializeField] Transform firePoint;
+
     void Start()
     {
         //interact
@@ -69,6 +75,7 @@ public class PlayerInteract : MonoBehaviour
         UpdateUI();
 
         animator = GetComponentInChildren<Animator>();
+        lockRot = false;
     }
 
 
@@ -84,14 +91,29 @@ public class PlayerInteract : MonoBehaviour
         {
             if (CheckShoot())
             {
+                
                 animator.SetBool("Shooting", true);
                 Debug.Log("ammo: " + inv["honey"]);
                 Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //Debug.Log(mousepos);
-                GameObject honeyshot = Instantiate<GameObject>(honey, transform.position, Quaternion.identity);
+                GameObject honeyshot = Instantiate<GameObject>(honey, firePoint.position, Quaternion.identity);
                 //Instantiate<GameObject>(honey, new Vector3(mousepos.x, mousepos.y, 0), Quaternion.identity);
                 honeyshot.transform.up = new Vector3(mousepos.x, mousepos.y, honeyshot.transform.position.z) - honeyshot.transform.position;
                 honeyshot.GetComponent<HoneyShot>().SetVars(mousepos);
+
+
+                if (mousepos.x < transform.position.x) //
+                {
+                    transform.rotation = new Quaternion(0, -180, 0, 0);
+                    firePoint.position = new Vector3(transform.position.x + 0.4440002f, firePoint.position.y, 0);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.identity;
+                    firePoint.position = new Vector3(transform.position.x - 0.4440002f, firePoint.position.y, 0);
+                }
+                StartCoroutine(LockRotation(0.45f)); //lock rotation for firing
+
                 inv["honey"] -= 1;
                 UpdateUI();
             }
@@ -141,14 +163,18 @@ public class PlayerInteract : MonoBehaviour
         if (!hidden)
         {
             float input = Input.GetAxis("Horizontal");
-            if (input > 0)
+            if (!lockRot)
             {
-                transform.rotation = Quaternion.identity;
+                if (input > 0)
+                {
+                    transform.rotation = Quaternion.identity;
+                }
+                else if (input < 0)
+                {
+                    transform.rotation = new Quaternion(0, -180, 0, 0);
+                }
             }
-            else if (input < 0)
-            {
-                transform.rotation = new Quaternion(0, -180, 0, 0);
-            }
+
             // Movement
             Vector2 moveForce = playerInput * moveSpeed;
             moveForce = moveForce + forceToApplyOnPlayer;
@@ -299,5 +325,10 @@ public class PlayerInteract : MonoBehaviour
         
     }
 
-   
+    IEnumerator LockRotation(float time)
+    {
+        lockRot = true;
+        yield return new WaitForSeconds(time);
+        lockRot = false;
+    }
 }
