@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Indicator : MonoBehaviour
 {
-    private SpriteRenderer sprite;
+    private Transform sprite;
     private void Start()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
+        sprite = transform.GetChild(0);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
+            sprite.gameObject.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+            sprite.gameObject.SetActive(false);
         }
     }
 }
