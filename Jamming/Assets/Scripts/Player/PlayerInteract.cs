@@ -39,8 +39,10 @@ public class PlayerInteract : MonoBehaviour
 
 
     //animation
-    public bool moving;
-    public bool shooting;
+    //public bool moving;
+    //public bool shooting;
+    private Animator animator;
+
 
     // Start is called before the first frame update
     public TextMeshProUGUI honeytext;
@@ -65,6 +67,8 @@ public class PlayerInteract : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
 
         UpdateUI();
+
+        animator = GetComponentInChildren<Animator>();
     }
 
 
@@ -80,7 +84,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (CheckShoot())
             {
-                shooting = true;
+                animator.SetBool("Shooting", true);
                 Debug.Log("ammo: " + inv["honey"]);
                 Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //Debug.Log(mousepos);
@@ -98,7 +102,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
-            shooting = false;
+            animator.SetBool("Shooting", false);
         }
 
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E)) //interact
@@ -151,12 +155,12 @@ public class PlayerInteract : MonoBehaviour
             forceToApplyOnPlayer /= forceOnSide;
             if (Mathf.Abs(forceToApplyOnPlayer.x) <= 0.01f && Mathf.Abs(forceToApplyOnPlayer.y) <= 0.01f)
             {
-                moving = false;
+                animator.SetBool("Moving", false);
                 forceToApplyOnPlayer = Vector2.zero;
             }
             else
             {
-                moving = true;
+                animator.SetBool("Moving", false);
             }
             rb.velocity = moveForce;
         }
