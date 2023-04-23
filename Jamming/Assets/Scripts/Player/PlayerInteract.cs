@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using TMPro;
+
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -41,6 +43,8 @@ public class PlayerInteract : MonoBehaviour
     public bool shooting;
 
     // Start is called before the first frame update
+    public TextMeshProUGUI honeytext;
+    public TextMeshProUGUI beetext;
 
     void Start()
     {
@@ -59,6 +63,8 @@ public class PlayerInteract : MonoBehaviour
         hidden = false;
         stealthTerrain = false;
         sprite = GetComponent<SpriteRenderer>();
+
+        UpdateUI();
     }
 
 
@@ -83,6 +89,7 @@ public class PlayerInteract : MonoBehaviour
                 honeyshot.transform.up = new Vector3(mousepos.x, mousepos.y, honeyshot.transform.position.z) - honeyshot.transform.position;
                 honeyshot.GetComponent<HoneyShot>().SetVars(mousepos);
                 inv["honey"] -= 1;
+                UpdateUI();
             }
             else
             {
@@ -178,6 +185,8 @@ public class PlayerInteract : MonoBehaviour
         if (item == "Bee") {
             sound.sound = inv[item] * 3 + 5;
         }
+        UpdateUI();
+        
     }
 
     //returns the actual amount of the item removed (if it returns 0, that means there was no item
@@ -189,14 +198,18 @@ public class PlayerInteract : MonoBehaviour
             if (inv[item] <= 0){ //calculate the difference between amount to remove and amount actually removed
                 int diff = inv[item] * -1;
                 inv[item] = 0;
+                UpdateUI();
                 return amount - diff;   
             }
+            UpdateUI();
             return amount;
+            
         }
         catch
         {
             return 0;
         }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -240,7 +253,13 @@ public class PlayerInteract : MonoBehaviour
     //
     //end interaction system
 
-
+    public void UpdateUI() {
+        if (beetext != null)
+        {
+            beetext.text = "" + inv["Bee"];
+            honeytext.text = "" + inv["honey"];
+        }
+    }
 
     //start honey shooting system
     private bool CheckShoot()
