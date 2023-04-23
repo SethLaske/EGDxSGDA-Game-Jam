@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  scene: 
 --- !u!212 &260248622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -876,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  scene: a
 --- !u!1 &649147041
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  scene: 
 --- !u!212 &914901485
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1274,6 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  scene: Tutorial2
 --- !u!1 &1297148229
 GameObject:
   m_ObjectHideFlags: 0

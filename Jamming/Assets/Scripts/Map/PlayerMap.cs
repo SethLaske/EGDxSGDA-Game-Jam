@@ -11,6 +11,8 @@ public class PlayerMap : MonoBehaviour
     Vector3 target;
     float currentDir;
     Vector3 startLoc;
+    MapNode currentLevel;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -18,16 +20,25 @@ public class PlayerMap : MonoBehaviour
         stopMove = true;
         target = waypoints[currentWaypoint].transform.position;
         startLoc = target;
-        currentDir = 0; 
+        currentDir = 0;
+        currentLevel = waypoints[currentWaypoint].GetComponent<MapNode>();
     }
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (currentLevel)
+            {
+                currentLevel.Switch();
+            }
+        }
         float LR = Input.GetAxis("Horizontal"); //-1 = left?
         if(LR != 0 && stopMove)
         {
             currentDir = LR;
             stopMove = false;
+            currentLevel = null;
         }
         if (!stopMove)
         {
@@ -38,6 +49,7 @@ public class PlayerMap : MonoBehaviour
                 {
                     startLoc = target;
                     stopMove = true;
+                    currentLevel = waypoints[currentWaypoint].GetComponent<MapNode>();
                 }
                 else if (currentDir < 0 && currentWaypoint < (waypoints.Count - 1))
                 {
