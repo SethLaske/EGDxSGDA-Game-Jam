@@ -7,7 +7,7 @@ public class PlayerMap : MonoBehaviour
     [SerializeField]
     List<GameObject> waypoints;
     bool stopMove;
-    int currentWaypoint;
+    [SerializeField] int currentWaypoint;
     Vector3 target;
     float currentDir;
     Vector3 startLoc;
@@ -36,14 +36,21 @@ public class PlayerMap : MonoBehaviour
         float LR = Input.GetAxis("Horizontal"); //-1 = left?
         if(LR != 0 && stopMove)
         {
-            currentDir = LR;
-            stopMove = false;
-            currentLevel = null;
+            if((LR < 0 && currentWaypoint == waypoints.Count - 1) || (LR > 0 && currentWaypoint == 0))
+            {
+                //pass
+            }
+            else
+            {
+                currentDir = LR;
+                stopMove = false;
+                currentLevel = null;
+            }
         }
         if (!stopMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, target, 5f * Time.deltaTime);
-            if (Vector2.Distance(transform.position, target) < 0.2f) //magic number, can adjust as needed
+            if (Vector2.Distance(transform.position, target) < 0.05f) //magic number, can adjust as needed
             {
                 if (waypoints[currentWaypoint].GetComponent<MapNode>().type == MapNode.pointType.stop && target != startLoc)
                 {
