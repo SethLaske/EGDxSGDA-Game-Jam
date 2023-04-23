@@ -123,9 +123,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 384426054054801164}
     m_Modifications:
+    - target: {fileID: 3395484944537347061, guid: 7f6e95d8ffd4bf041bb237c1f86f70e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5319843184872450828, guid: 7f6e95d8ffd4bf041bb237c1f86f70e3, type: 3}
       propertyPath: m_Name
       value: Honey_Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495911361505004938, guid: 7f6e95d8ffd4bf041bb237c1f86f70e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8331931980813011938, guid: 7f6e95d8ffd4bf041bb237c1f86f70e3, type: 3}
       propertyPath: m_RootOrder

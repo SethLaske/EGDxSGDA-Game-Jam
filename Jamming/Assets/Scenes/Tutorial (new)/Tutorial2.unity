@@ -3538,11 +3538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545506191682668102, guid: 8ff8af7d514ba7942a3548e7874efa9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 104.2
+      value: 102.7
       objectReference: {fileID: 0}
     - target: {fileID: 1545506191682668102, guid: 8ff8af7d514ba7942a3548e7874efa9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.1
+      value: 18.74
       objectReference: {fileID: 0}
     - target: {fileID: 1545506191682668102, guid: 8ff8af7d514ba7942a3548e7874efa9f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3788,7 +3788,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029176151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 104.2, y: 16.1, z: -10}
+  m_LocalPosition: {x: 102.7, y: 18.74, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5374,6 +5374,18 @@ PrefabInstance:
     - target: {fileID: 2908461212608337, guid: 12a1a1cc1e0fde44fbd644126547a013, type: 3}
       propertyPath: m_Name
       value: BeeWithIndicator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373758573694287598, guid: 12a1a1cc1e0fde44fbd644126547a013, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531201566000264561, guid: 12a1a1cc1e0fde44fbd644126547a013, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021358429062339761, guid: 12a1a1cc1e0fde44fbd644126547a013, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.82
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12a1a1cc1e0fde44fbd644126547a013, type: 3}
