@@ -17,10 +17,18 @@ public class Bear : MonoBehaviour
     public Transform seen;
     public Vector3 lastposition;
     public NavMeshAgent agent;
-    public Honey seenhoney;
+    //public Honey seenhoney;
+    public List<Honey> honeybrain = new List<Honey>();
     //public Vector3 direction;
-    public bool focused;
+    public bool hunting;
+    public bool eating;
+
     public float degreestorotate = 0;
+
+    public CircleCollider2D firstcollider;
+    public CircleCollider2D secondcollider;
+
+    public Collider2D sight;
 
     // Start is called before the first frame update
     void Start()
@@ -38,64 +46,57 @@ public class Bear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (degreestorotate == 0 && agent.velocity.magnitude > 1) {
+        if (agent.velocity.magnitude > 1) {
             rotate(agent.velocity);
         }
 
+        
 
-        if (state == "Patrol")
+        if (state == "Chase")
         {
-            Patrol();
+            Chase();
+        }
+        else if (honeybrain.Count > 0 && hunting == false)
+        {
+            if (honeybrain[0] == null)
+            {
+                honeybrain.RemoveAt(0);
+            }
+            else {
+                state = "GoToHoney";
+                Debug.Log("Moving towards honey");
+                GoToHoney();
+            }
         }
         else if (state == "Approach")
         {
             Approach();
         }
-        else if (state == "Chase") {
-            Chase();
+        else if (state == "Patrol") {
+            Patrol();
         }
-        else if (state == "GoToHoney")
-        {
-            GoToHoney();
-        }
-        //Debug.Log("Remaining Distance: " + agent.remainingDistance);
-        /*if (seen != null)
-        {
-            agent.SetDestination(seen.position);
-            Vector3 direction = seen.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, direction.magnitude, obstacleLayer);
-            if (hit.collider != null)
-            {
-                lastposition = seen.position;
-
-                agent.SetDestination(lastposition);
-                seen = null;
-                StartCoroutine(LostSight());
-            }
-        }
-        else {
-            //rotate(agent.velocity);
-        }*/
-
-
+        
 
     }
 
-    public void Patrol() { 
+    public void Patrol() {
         //Nothing happens, kinda just follows path
-    
+        agent.speed = walkspeed;
+        //honeybrain.Clear();
     }
 
     public void Approach() {
-        if (agent.remainingDistance > .2f)
+        agent.speed = runspeed;
+        if (agent.remainingDistance > .6f)
         {
-            Debug.Log("Approaching last known location");
-            Debug.Log("Remaing distance: " + agent.remainingDistance);
+            Debug.Log("Approaching a location");
+            //Debug.Log("Remaing distance: " + agent.remainingDistance);
             return;
         }
         //agent.ResetPath();
 
         //Do a full 360
+        
         if (degreestorotate < 360)
         {
             Debug.Log("doing a 360");
@@ -103,12 +104,12 @@ public class Bear : MonoBehaviour
             transform.Rotate(Vector3.forward, rotatespeed * 1 * Time.deltaTime);
             return;
         }
-        
         degreestorotate = 0;
 
+
         //go to the next thing
-        
-        focused = false;
+
+        hunting = false;
         agent.speed = walkspeed;
         agent.SetDestination(nextpost);
         state = "Patrol";
@@ -125,22 +126,29 @@ public class Bear : MonoBehaviour
             //agent.SetDestination(lastposition);
             
             seen = null;
+            agent.speed = walkspeed;
             state = "Approach";
-
+            degreestorotate = 0;
+            honeybrain.Clear();
         }
     }
 
     public void GoToHoney()
     {
-        if (agent.remainingDistance > .2f)
+        agent.SetDestination(honeybrain[0].transform.position);
+        if (agent.remainingDistance > .6f)
         {
-            Debug.Log("Approaching last known location");
-            Debug.Log("Remaing distance: " + agent.remainingDistance);
+            Debug.Log("Approaching last honey");
+            //Debug.Log("Remaing distance: " + agent.remainingDistance);
             return;
         }
-
-        state = "EatingHoney";
-        StartCoroutine(EatHoney());
+        Debug.Log("Arrived at honey");
+        if (eating == false) {
+            state = "EatingHoney";
+            Debug.Log("Eating honey");
+            StartCoroutine(EatHoney());
+        }
+        
     }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -148,7 +156,7 @@ public class Bear : MonoBehaviour
         
         if (collision.gameObject.tag == "path") {
             nextpost = collision.GetComponent<PathPost>().nextpost.transform.position;
-            if (focused == false) {
+            if (hunting == false) {
                 //StartCoroutine(ChangeDirection());
                 agent.SetDestination(nextpost);
             }
@@ -157,80 +165,45 @@ public class Bear : MonoBehaviour
 
         else if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Player Eaten");
-            Stun(3);
+            Debug.Log("Player contacted");
+            PlayerInteract player = collision.GetComponent<PlayerInteract>();
+            int beesused = player.RemoveItem("Bee", 5);
+            Debug.Log(beesused + " Bees used to save player");
+            Stun(beesused);
+            if (beesused == 0) {
+                Debug.Log("GAMEOVER");
+            }
             //gameover
         }
     }
 
-    /*IEnumerator ChangeDirection() {
-        //rb.velocity = Vector2.zero;
-        //rotate(nextpost - transform.position);
-        Vector3 targetvector = (nextpost - transform.position).normalized;
-        float angle = Mathf.Atan2(targetvector.y, targetvector.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle + 90);
-        while (transform.rotation != targetRotation)
-        {
-            //Debug.Log("Rotating");
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotatespeed * Time.deltaTime);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        //transform.rotation = Quaternion.Euler(0, 0, angle + 90);
-
-        //yield return new WaitForSeconds(1f);
-        //rb.velocity = (nextpost - transform.position).normalized * movespeed;
-    }
-
-    IEnumerator LostSight() {
-        //Approach the last remaining location
-        while (agent.remainingDistance > .2f) {
-            Debug.Log("Approaching last known location");
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        agent.ResetPath();
-        //Do a full 360
-        Quaternion initialdirection = transform.rotation;
-
-        
-        
-        while (degreestorotate < 360)
-        {
-            Debug.Log("doing a 360");
-            degreestorotate += rotatespeed * Time.deltaTime;
-            transform.Rotate(Vector3.forward, rotatespeed * 1 * Time.deltaTime);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        Debug.Log("Degrees to Rotate: " + degreestorotate);
-        degreestorotate = 0;
-        Debug.Log("Degrees to Rotate: " + degreestorotate);
-        //go to the next thing
-        Debug.Log("moving on with my life");
-        focused = false;
-        agent.speed = walkspeed;
-        agent.SetDestination(nextpost);
-
-    }
-
-    private float normalize_angle_left_right(float angle)
-    {
-        while (angle < -Mathf.PI) angle += 2 * Mathf.PI;
-        while (angle > Mathf.PI) angle -= 2 * Mathf.PI;
-        return angle;
-    }*/
+    
 
     IEnumerator EatHoney() {
-        focused = true;
+        firstcollider.enabled = false;
+        secondcollider.enabled = false;
+        eating = true;
+
         yield return new WaitForSeconds(2f);
-        Destroy(seenhoney.gameObject);
+        //Destroy(seenhoney.gameObject);
+        Honey temp = honeybrain[0];
+
+        
+        honeybrain.RemoveAt(0);
+        Destroy(temp.gameObject);
         state = "Patrol";
         agent.SetDestination(nextpost);
-        focused = false;
+        eating = false;
+        sight.enabled = false;
+        sight.enabled = true;
+        firstcollider.enabled = true;
+        secondcollider.enabled = true;
     }
 
     public void ApproachSight(Transform location)
     {
-        if (focused == false) {
-            focused = true;
+        if (eating == false) {
+            hunting = true;
             seen = location;
             agent.speed = runspeed;
             state = "Chase";
@@ -244,31 +217,43 @@ public class Bear : MonoBehaviour
         if (state == "Patrol") {
             agent.SetDestination(location);
             state = "Approach";
+            degreestorotate = 0;
             Debug.Log("The bear is bothered and will approach the noise");
         }
     }
 
     public void ApproachHoney(Honey honey) {
-        if (state == "Patrol" || state == "Approach") {
-            seenhoney = honey;
-            agent.SetDestination(honey.transform.position);
-            state = "GoToHoney";
-        }
+        
+        honeybrain.Add(honey);
+            //seenhoney = honey;
+            //agent.SetDestination(honey.transform.position);
+            //state = "GoToHoney";
+        
     }
 
     public void Stun(float time) {
-        StartCoroutine(StunRoutine(time));
+        if (time > 0) {
+            StartCoroutine(StunRoutine(time));
+        }
+        
     }
 
     IEnumerator StunRoutine(float time)
     {
+        firstcollider.enabled = false;
+        secondcollider.enabled = false;
+
         agent.isStopped = true;
         yield return new WaitForSeconds(time);
         
         agent.isStopped = false;
         agent.SetDestination(transform.position);
         state = "Approach";
-        focused = false;
+        degreestorotate = 0;
+        hunting = false;
+
+        firstcollider.enabled = true;
+        secondcollider.enabled = true;
     }
 
     public void rotate(Vector3 targetdirection) {
