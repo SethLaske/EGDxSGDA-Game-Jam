@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8350992791506933775}
   - component: {fileID: 8350992791506933768}
   m_Layer: 0
-  m_Name: HoneyProjectile_Animated
+  m_Name: DontUse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
