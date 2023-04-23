@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +42,7 @@ public class Bear : MonoBehaviour
     private MusicController worldMusic;
     private bool hasAddedToCount;
 
-
+    public CinemachineVirtualCamera virtualCamera;
     //animation
     private Animator animator;
     //bools: Eating, Running, Attacking
@@ -49,6 +50,7 @@ public class Bear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        virtualCamera = GameObject.FindGameObjectWithTag("Cinema").GetComponent<CinemachineVirtualCamera>();
         state = "Patrol";
         nextpost = firstpost.transform.position;
         agent.SetDestination(nextpost);
@@ -209,7 +211,7 @@ public class Bear : MonoBehaviour
         
     }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         
         
@@ -234,9 +236,29 @@ public class Bear : MonoBehaviour
             int beesused = player.RemoveItem("Bee", 5);
             Debug.Log(beesused + " Bees used to save player");
             Stun(beesused);
-            if (beesused == 0) {
+
+            if (beesused == 0)
+            {
                 Debug.Log("GAMEOVER");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else {
+                
+                float shakeDuration = 0.5f;
+                float shakeAmplitude = 1.2f;
+                float shakeFrequency = 2.0f;
+
+                CinemachineImpulseSource impulseSource;
+
+
+    // Get the Cinemachine Impulse Source component from the virtual camera
+                impulseSource = virtualCamera.GetComponent<CinemachineImpulseSource>();
+
+
+
+                // Trigger a screen shake effect when the player collides with the object
+                //impulseSource.GenerateImpulse(new Vector2(shakeAmplitude, shakeAmplitude), shakeFrequency, shakeDuration);    
+                impulseSource.GenerateImpulse();
             }
             //gameover
         }
