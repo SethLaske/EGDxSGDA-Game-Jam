@@ -927,10 +927,12 @@ MonoBehaviour:
   lastposition: {x: 0, y: 0, z: 0}
   agent: {fileID: 5321450862077991798}
   honeybrain: []
-  focused: 0
+  hunting: 0
+  eating: 0
   degreestorotate: 0
   firstcollider: {fileID: 6512132093857034049}
   secondcollider: {fileID: -4388097528752495453}
+  sight: {fileID: 6512132093108995244}
 --- !u!58 &6512132093857034049
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class Bear : MonoBehaviour
 {
     public string state;
 
+    public int pathnumber;
+
     public float walkspeed;
     public float runspeed;
     public float rotatespeed;
@@ -155,8 +157,9 @@ public class Bear : MonoBehaviour
     {
         
         if (collision.gameObject.tag == "path") {
-            nextpost = collision.GetComponent<PathPost>().nextpost.transform.position;
-            if (hunting == false) {
+            PathPost post = collision.GetComponent<PathPost>();
+            nextpost = post.nextpost.transform.position;
+            if (post.pathnumber == pathnumber && hunting == false) {
                 //StartCoroutine(ChangeDirection());
                 agent.SetDestination(nextpost);
             }
@@ -183,7 +186,7 @@ public class Bear : MonoBehaviour
         firstcollider.enabled = false;
         secondcollider.enabled = false;
         eating = true;
-
+        sight.enabled = false;
         yield return new WaitForSeconds(2f);
         //Destroy(seenhoney.gameObject);
         Honey temp = honeybrain[0];
@@ -191,13 +194,17 @@ public class Bear : MonoBehaviour
         
         honeybrain.RemoveAt(0);
         Destroy(temp.gameObject);
+
         state = "Patrol";
         agent.SetDestination(nextpost);
         eating = false;
-        sight.enabled = false;
+        
         sight.enabled = true;
+        
         firstcollider.enabled = true;
         secondcollider.enabled = true;
+        
+        //state = "Patrol";
     }
 
     public void ApproachSight(Transform location)
