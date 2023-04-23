@@ -28,6 +28,7 @@ public class PlayerInteract : MonoBehaviour
     string[] raycastIgnoreLayers;
     LayerMask raycastMask;
     [SerializeField] private GameObject honey;
+    public SoundObject sound;
 
     //stealth
     public bool hidden;
@@ -48,6 +49,7 @@ public class PlayerInteract : MonoBehaviour
         raycastMask = LayerMask.GetMask(raycastIgnoreLayers);
         raycastMask = ~raycastMask;
         inv["honey"] = 5;
+        inv["Bee"] = 0;
 
         //stealth
         hidden = false;
@@ -99,11 +101,13 @@ public class PlayerInteract : MonoBehaviour
                     hidden = !hidden;
                     if (hidden)
                     {
+                        sound.sound = 0;
                         transform.position = obj.transform.position;
                         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
                     }
                     else
                     {
+                        sound.sound = inv["Bee"] * 3 + 5;
                         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
                     }
                 }
@@ -148,6 +152,9 @@ public class PlayerInteract : MonoBehaviour
             inv[item] = amount;
         }
         Debug.Log(item + " amount: " + inv[item]);
+        if (item == "Bee") {
+            sound.sound = inv[item] * 3 + 5;
+        }
     }
 
     //returns the actual amount of the item removed (if it returns 0, that means there was no item

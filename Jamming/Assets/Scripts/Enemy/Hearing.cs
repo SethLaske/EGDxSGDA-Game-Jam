@@ -12,8 +12,10 @@ public class Hearing : MonoBehaviour
         if (sound != null)
         {
             Debug.Log("Something heard");
-            
-            float chance = chancemultiplier * sound.sound / Vector3.Distance(sound.transform.position, bear.transform.position);
+            if (sound.sound == 0) {
+                return;
+            }
+            float chance = chancemultiplier * Vector3.Distance(sound.transform.position, bear.transform.position)/ sound.sound;
 
             if (Random.Range(0, chance) < 1) {
                 bear.ApproachAudio(sound.transform.position);

@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     [SerializeField] string nextScene = "Map";
+    public int minimumbees;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            SceneManager.LoadScene(nextScene);
+            PlayerInteract player = collision.GetComponent<PlayerInteract>();
+            if (player.RemoveItem("Bee", minimumbees) == minimumbees) {
+                SceneManager.LoadScene(nextScene);
+            }
         }
     }
 }

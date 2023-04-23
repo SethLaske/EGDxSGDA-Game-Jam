@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6093481974944187643}
   m_Layer: 0
   m_Name: PathPost
-  m_TagString: path
+  m_TagString: NoStop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextpost: {fileID: 0}
+  pathnumber: 0
 --- !u!50 &132305431960168124
 Rigidbody2D:
   serializedVersion: 4

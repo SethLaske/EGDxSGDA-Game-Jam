@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Bear : MonoBehaviour
 {
@@ -156,8 +157,10 @@ public class Bear : MonoBehaviour
         private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.gameObject.tag == "path") {
-            PathPost post = collision.GetComponent<PathPost>();
+        
+        PathPost post = collision.GetComponent<PathPost>();
+        if (post != null)
+        {
             nextpost = post.nextpost.transform.position;
             if (post.pathnumber == pathnumber && hunting == false) {
                 //StartCoroutine(ChangeDirection());
@@ -175,6 +178,7 @@ public class Bear : MonoBehaviour
             Stun(beesused);
             if (beesused == 0) {
                 Debug.Log("GAMEOVER");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             //gameover
         }
