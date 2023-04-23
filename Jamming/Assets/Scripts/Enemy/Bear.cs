@@ -40,6 +40,12 @@ public class Bear : MonoBehaviour
 
     private MusicController worldMusic;
     private bool hasAddedToCount;
+
+
+    //animation
+    private Animator animator;
+    //bools: Eating, Running, Attacking
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +59,29 @@ public class Bear : MonoBehaviour
 
         worldMusic = GameObject.Find("Music Controller").GetComponent<MusicController>();
         hasAddedToCount = false;
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void setAnims(int boolToSet)
+    {
+        if(boolToSet == 0)
+        {
+            animator.SetBool("isEating", true);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isAttacking", false);
+        }
+        else if(boolToSet == 1)
+        {
+            animator.SetBool("isRunning", true);
+            animator.SetBool("isEating", false);
+            animator.SetBool("isAttacking", false);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", true);
+            animator.SetBool("isEating", false);
+            animator.SetBool("isRunning", false);
+        }
     }
 
     // Update is called once per frame
@@ -66,6 +95,7 @@ public class Bear : MonoBehaviour
 
         if (state == "Chase")
         {
+            setAnims(1); //run
             Chase();
             if (!hasAddedToCount)
             {
@@ -88,10 +118,12 @@ public class Bear : MonoBehaviour
         }
         else if (state == "Approach")
         {
+            setAnims(1);
             Approach();
         }
         else if (state == "Patrol")
         {
+            setAnims(1);
             Patrol();
         }
         if (state != "Chase")
@@ -194,6 +226,7 @@ public class Bear : MonoBehaviour
 
         else if (collision.gameObject.tag == "Player")
         {
+            setAnims(2); //attack
             firstcollider.enabled = false;
             secondcollider.enabled = false;
             Debug.Log("Player contacted");
@@ -212,6 +245,7 @@ public class Bear : MonoBehaviour
     
 
     IEnumerator EatHoney() {
+        setAnims(0);
         eathoney.Play();
         firstcollider.enabled = false;
         secondcollider.enabled = false;
