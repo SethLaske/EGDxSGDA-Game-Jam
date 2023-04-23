@@ -90,7 +90,7 @@ public class Bear : MonoBehaviour
 
     public void Approach() {
         agent.speed = runspeed;
-        if (agent.remainingDistance > .6f)
+        if (agent.remainingDistance > .4f)
         {
             Debug.Log("Approaching a location");
             //Debug.Log("Remaing distance: " + agent.remainingDistance);
