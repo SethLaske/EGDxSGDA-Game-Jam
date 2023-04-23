@@ -11,8 +11,18 @@ public class Interactable : MonoBehaviour
         PassiveHide
     }
     [SerializeField] protected string itemName;
+    public AudioClip audiofile;
     public virtual InteractType Interact(PlayerInteract playerInteract)
     {
+        
+        if (audiofile != null) {
+            AudioSource soundEffect = (new GameObject("Sound")).AddComponent<AudioSource>();
+            soundEffect.clip = audiofile;
+            soundEffect.Play();
+
+            // Destroy the game object after the sound effect has finished playing
+            Destroy(soundEffect.gameObject, audiofile.length);
+        }
         playerInteract.AddItem(itemName);
         Destroy(gameObject);
         return InteractType.Pickup; //tells controller what type it was (in this case, makes controller know this item was destroyed
@@ -23,4 +33,6 @@ public class Interactable : MonoBehaviour
     {
         return itemName;
     }
+
+    
 }

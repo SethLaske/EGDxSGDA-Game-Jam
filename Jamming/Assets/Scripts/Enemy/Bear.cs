@@ -33,6 +33,10 @@ public class Bear : MonoBehaviour
 
     public Collider2D sight;
 
+    public AudioSource charge;
+    public AudioSource eathoney;
+    public AudioSource stung;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -171,6 +175,8 @@ public class Bear : MonoBehaviour
 
         else if (collision.gameObject.tag == "Player")
         {
+            firstcollider.enabled = false;
+            secondcollider.enabled = false;
             Debug.Log("Player contacted");
             PlayerInteract player = collision.GetComponent<PlayerInteract>();
             int beesused = player.RemoveItem("Bee", 5);
@@ -187,11 +193,12 @@ public class Bear : MonoBehaviour
     
 
     IEnumerator EatHoney() {
+        eathoney.Play();
         firstcollider.enabled = false;
         secondcollider.enabled = false;
         eating = true;
         sight.enabled = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         //Destroy(seenhoney.gameObject);
         Honey temp = honeybrain[0];
 
@@ -214,9 +221,13 @@ public class Bear : MonoBehaviour
     public void ApproachSight(Transform location)
     {
         if (eating == false) {
+            if (hunting == false) {
+                charge.Play();
+            }
             hunting = true;
             seen = location;
             agent.speed = runspeed;
+            
             state = "Chase";
             degreestorotate = 0;
             Debug.Log("The bear has seen something and will go straight to it");
@@ -251,6 +262,8 @@ public class Bear : MonoBehaviour
 
     IEnumerator StunRoutine(float time)
     {
+        charge.Stop();
+        stung.Play();
         firstcollider.enabled = false;
         secondcollider.enabled = false;
 
