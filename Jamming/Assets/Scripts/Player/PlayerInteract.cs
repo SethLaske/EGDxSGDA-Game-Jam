@@ -15,6 +15,7 @@ public class PlayerInteract : MonoBehaviour
     public Vector2 forceToApplyOnPlayer;
     Vector2 playerInput;
     public float forceOnSide = 5f;
+    
 
 
     //public float sound;
@@ -234,4 +235,6 @@ public class PlayerInteract : MonoBehaviour
         return false;
         
     }
+
+   
 }

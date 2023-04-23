@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameOverScript : MonoBehaviour
 {
     public GameObject gameOverUI;
-
-
+    
     public void gameOver()
     {
         // Need an if for when player touches bear
