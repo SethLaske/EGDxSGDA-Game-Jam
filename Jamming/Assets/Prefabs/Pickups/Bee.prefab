@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Bee
-  audiofile: {fileID: 0}
+  audiofile: {fileID: 8300000, guid: f226f10bec35d2b44af4f814c5eb3c71, type: 3}
 --- !u!50 &3499480282031497745
 Rigidbody2D:
   serializedVersion: 4
