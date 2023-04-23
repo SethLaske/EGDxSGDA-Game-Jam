@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: honey
-  audiofile: {fileID: 2336445982045894309}
+  audiofile: {fileID: 8300000, guid: dc8e08d63e16bac4eb9ec8b2af050f68, type: 3}
 --- !u!50 &793293959866080547
 Rigidbody2D:
   serializedVersion: 4
