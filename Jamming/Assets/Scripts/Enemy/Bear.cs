@@ -30,7 +30,7 @@ public class Bear : MonoBehaviour
     public float degreestorotate = 0;
 
     public CircleCollider2D firstcollider;
-    public CircleCollider2D secondcollider;
+    //public CircleCollider2D secondcollider;
 
     public Collider2D sight;
 
@@ -230,7 +230,7 @@ public class Bear : MonoBehaviour
         {
             setAnims(2); //attack
             firstcollider.enabled = false;
-            secondcollider.enabled = false;
+            //secondcollider.enabled = false;
             Debug.Log("Player contacted");
             PlayerInteract player = collision.GetComponent<PlayerInteract>();
             int beesused = player.RemoveItem("Bee", 5);
@@ -243,21 +243,9 @@ public class Bear : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else {
-                
-                float shakeDuration = 0.5f;
-                float shakeAmplitude = 1.2f;
-                float shakeFrequency = 2.0f;
-
                 CinemachineImpulseSource impulseSource;
-
-
     // Get the Cinemachine Impulse Source component from the virtual camera
                 impulseSource = virtualCamera.GetComponent<CinemachineImpulseSource>();
-
-
-
-                // Trigger a screen shake effect when the player collides with the object
-                //impulseSource.GenerateImpulse(new Vector2(shakeAmplitude, shakeAmplitude), shakeFrequency, shakeDuration);    
                 impulseSource.GenerateImpulse();
             }
             //gameover
@@ -270,7 +258,7 @@ public class Bear : MonoBehaviour
         setAnims(0);
         eathoney.Play();
         firstcollider.enabled = false;
-        secondcollider.enabled = false;
+        //secondcollider.enabled = false;
         eating = true;
         sight.enabled = false;
         yield return new WaitForSeconds(2.5f);
@@ -288,7 +276,7 @@ public class Bear : MonoBehaviour
         sight.enabled = true;
         
         firstcollider.enabled = true;
-        secondcollider.enabled = true;
+        //secondcollider.enabled = true;
         
         //state = "Patrol";
     }
@@ -340,7 +328,7 @@ public class Bear : MonoBehaviour
         charge.Stop();
         stung.Play();
         firstcollider.enabled = false;
-        secondcollider.enabled = false;
+        //secondcollider.enabled = false;
 
         agent.isStopped = true;
         yield return new WaitForSeconds(time);
@@ -352,7 +340,7 @@ public class Bear : MonoBehaviour
         hunting = false;
 
         firstcollider.enabled = true;
-        secondcollider.enabled = true;
+        //secondcollider.enabled = true;
     }
 
     public void rotate(Vector3 targetdirection) {
