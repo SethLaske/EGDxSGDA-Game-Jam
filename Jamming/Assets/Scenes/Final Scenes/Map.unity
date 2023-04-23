@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  scene: Level_2
+  scene: Level 2
 --- !u!1 &649147041
 GameObject:
   m_ObjectHideFlags: 0
