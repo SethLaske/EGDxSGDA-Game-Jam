@@ -32,7 +32,7 @@ public class PlayerInteract : MonoBehaviour
     //stealth
     public bool hidden;
     private bool stealthTerrain;
-
+    private SpriteRenderer sprite;
 
 
     // Start is called before the first frame update
@@ -52,6 +52,7 @@ public class PlayerInteract : MonoBehaviour
         //stealth
         hidden = false;
         stealthTerrain = false;
+        sprite = GetComponent<SpriteRenderer>();
     }
 
 
@@ -96,6 +97,15 @@ public class PlayerInteract : MonoBehaviour
                 else if (type == Interactable.InteractType.ActiveHide)
                 {
                     hidden = !hidden;
+                    if (hidden)
+                    {
+                        transform.position = obj.transform.position;
+                        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+                    }
+                    else
+                    {
+                        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
+                    }
                 }
             }
         }
