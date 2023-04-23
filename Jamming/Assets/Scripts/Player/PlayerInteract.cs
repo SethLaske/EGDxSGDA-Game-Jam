@@ -292,7 +292,7 @@ public class PlayerInteract : MonoBehaviour
             return true;
         }  
         */
-        if(inv["honey"] > 0){
+        if(inv["honey"] > 0 && hidden == false){
             return true;
         }
         return false;

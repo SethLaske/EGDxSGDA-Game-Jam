@@ -4109,7 +4109,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4599,7 +4599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4748,7 +4748,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5324,6 +5324,7 @@ GameObject:
   - component: {fileID: 1029176152}
   - component: {fileID: 1029176154}
   - component: {fileID: 1029176155}
+  - component: {fileID: 1029176156}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Cinema
@@ -5414,14 +5415,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 1
+    m_ImpulseShape: 4
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
+    m_ImpulseDuration: 0.25
     m_ImpulseType: 0
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 0}
@@ -5452,7 +5453,30 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_DefaultVelocity: {x: 1, y: -1, z: 0}
+--- !u!114 &1029176156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029176151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 1
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &1062862811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5654,7 +5678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6170,7 +6194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 745310358109546556, guid: ef17fb7d1afeab74c9295044de2917f1, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 745310358109546556, guid: ef17fb7d1afeab74c9295044de2917f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6835,7 +6859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7447,7 +7471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8364050796251202456, guid: 4350400833fc8b84986240ca13e003d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9066,7 +9090,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 384426055072712649, guid: fe25e48516702d04dbf8e9afe999cd83, type: 3}
       propertyPath: m_LocalPosition.x
