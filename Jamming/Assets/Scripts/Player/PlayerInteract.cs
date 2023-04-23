@@ -85,7 +85,7 @@ public class PlayerInteract : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) //interact
+        if (Input.GetMouseButtonDown(1)) //interact
         {
             int listSize = lastInteract.Count;
             if (listSize != 0) // != null 
