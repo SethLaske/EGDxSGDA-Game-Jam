@@ -177,7 +177,7 @@ SpriteRenderer:
   m_Size: {x: 21.244812, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &491241685
@@ -728,3 +728,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0312d4a8ee4774f41a6959af5209efd7, type: 3}
+--- !u!1001 &8350992791000309851
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8350992791506933769, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_Name
+      value: HoneyProjectile_Animated
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.697797
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 43.481255
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350992791506933774, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7b1c12cdd7e423f47a1c0aa8d0a012e9, type: 3}
