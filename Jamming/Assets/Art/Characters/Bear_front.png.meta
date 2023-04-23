@@ -103,7 +103,217 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Bear_front_2
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 618
+        width: 342
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e42a9c241af74f4b9611953b83e1a33
+      internalID: 1316238121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 554
+        width: 326
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b974397c6b0be45b516764db8d8a21
+      internalID: -873874721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_3
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 552
+        width: 302
+        height: 295
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dc7374abbaedb54389903b15b43d45f
+      internalID: 54715809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_4
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 519
+        width: 364
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce8dbbc95c8bd7b4c8422beaf3ca19d4
+      internalID: -1332005270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_5
+      rect:
+        serializedVersion: 2
+        x: 1499
+        y: 431
+        width: 361
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e7c0d84988610549a77da79220fa75a
+      internalID: 1972892389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_6
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 365
+        width: 361
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f47cf99f0de5a4d808d815017fd051
+      internalID: 549135209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_7
+      rect:
+        serializedVersion: 2
+        x: 2367
+        y: 308
+        width: 363
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0081a35e0250dde4daa4e845d76914db
+      internalID: -748879276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_8
+      rect:
+        serializedVersion: 2
+        x: 2787
+        y: 247
+        width: 276
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 055088f1bcef4a54d92f4968469e696e
+      internalID: 557597310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_9
+      rect:
+        serializedVersion: 2
+        x: 3170
+        y: 199
+        width: 363
+        height: 273
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb0e705e01449b048bcb273ac7ee3ce9
+      internalID: -1223736669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bear_front_10
+      rect:
+        serializedVersion: 2
+        x: 3624
+        y: 85
+        width: 324
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1066c3877b7b22b4090cde13c19238bd
+      internalID: 1512742374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +324,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bear_front_0: -2079619296
+      Bear_front_1: -873874721
+      Bear_front_10: 1512742374
+      Bear_front_11: -1921475026
+      Bear_front_12: -973067653
+      Bear_front_13: 64346369
+      Bear_front_14: -2140396074
+      Bear_front_16: 1856262160
+      Bear_front_17: -2022998542
+      Bear_front_18: 1235972557
+      Bear_front_19: -816448681
+      Bear_front_2: 1316238121
+      Bear_front_21: -1164995345
+      Bear_front_22: -1538663247
+      Bear_front_23: -1308550305
+      Bear_front_24: 357108269
+      Bear_front_25: -164081407
+      Bear_front_26: 1242475254
+      Bear_front_27: 934608473
+      Bear_front_3: 54715809
+      Bear_front_30: 921739166
+      Bear_front_31: -524693503
+      Bear_front_33: -1622631247
+      Bear_front_34: -1169680814
+      Bear_front_35: 916578059
+      Bear_front_36: 150580805
+      Bear_front_4: -1332005270
+      Bear_front_5: 1972892389
+      Bear_front_6: 549135209
+      Bear_front_7: -748879276
+      Bear_front_8: 557597310
+      Bear_front_9: -1223736669
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
