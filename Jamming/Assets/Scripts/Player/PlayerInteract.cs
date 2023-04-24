@@ -54,6 +54,8 @@ public class PlayerInteract : MonoBehaviour
     //firepoint
     [SerializeField] Transform firePoint;
 
+    [SerializeField] GameObject playerSprite;
+
     void Start()
     {
         //interact
@@ -145,12 +147,14 @@ public class PlayerInteract : MonoBehaviour
                     {
                         sound.sound = 0;
                         transform.position = obj.transform.position;
-                        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+                        //sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+                        playerSprite.SetActive(false);
                     }
                     else
                     {
                         sound.sound = inv["Bee"] * 3 + 5;
-                        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
+                        //sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 255);
+                        playerSprite.SetActive(true);
                     }
                 }
             }
