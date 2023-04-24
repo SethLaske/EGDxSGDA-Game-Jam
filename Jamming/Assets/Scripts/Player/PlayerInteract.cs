@@ -181,7 +181,7 @@ public class PlayerInteract : MonoBehaviour
             forceToApplyOnPlayer /= forceOnSide;
             if (Mathf.Abs(forceToApplyOnPlayer.x) <= 0.01f && Mathf.Abs(forceToApplyOnPlayer.y) <= 0.01f)
             {
-                animator.SetBool("Moving", false);
+                animator.SetBool("Moving", true);
                 forceToApplyOnPlayer = Vector2.zero;
             }
             else
