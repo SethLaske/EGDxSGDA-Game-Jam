@@ -341,12 +341,11 @@ MonoBehaviour:
   eating: 0
   degreestorotate: 0
   firstcollider: {fileID: 6512132093857034049}
-  secondcollider: {fileID: -4388097528752495453}
   sight: {fileID: 6512132093108995244}
   charge: {fileID: 7110531990612381843}
   eathoney: {fileID: 5535652123961773500}
   stung: {fileID: 2795857972316113001}
-  animator: {fileID: 7763623690095106759}
+  virtualCamera: {fileID: 0}
 --- !u!58 &6512132093857034049
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -784,7 +783,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.41395512, g: 0.53237605, b: 0.6415094, a: 0.28235295}
+  m_Color: {r: 0.41395512, g: 0.53237605, b: 0.6415094, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -939,11 +938,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d40be4b335f63d24bb09429d45df427c, type: 3}
---- !u!95 &7763623690095106759 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1757677416104212602, guid: d40be4b335f63d24bb09429d45df427c, type: 3}
-  m_PrefabInstance: {fileID: 8347818631055483581}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8976299231849014043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1102062800744464806, guid: d40be4b335f63d24bb09429d45df427c, type: 3}
