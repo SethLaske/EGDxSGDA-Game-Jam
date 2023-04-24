@@ -186,7 +186,7 @@ public class PlayerInteract : MonoBehaviour
             }
             else
             {
-                animator.SetBool("Moving", false);
+                animator.SetBool("Moving", true);
             }
             rb.velocity = moveForce;
         }
